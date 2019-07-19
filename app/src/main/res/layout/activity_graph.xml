@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.graph.GraphActivity">
+    <androidx.cardview.widget.CardView
+            android:id="@+id/staffAtt"
+            android:layout_width="match_parent"
+            android:layout_height="195dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <RelativeLayout
+
+                    android:id="@+id/staffAttRel"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:id="@+id/staffAttHeader"
+                        android:layout_width="wrap_content"
+                        android:text="@string/staff_attendance"
+                        android:textColor="#1e1e1e"
+                        android:gravity="center_vertical"
+                        android:layout_height="match_parent"/>
+
+                <ImageView
+                        android:id="@+id/staffAttMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"/>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#d2d2d2"
+                        android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_below="@+id/staffAttRel"
+
+                    android:layout_above="@+id/staffAttFootlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+                        <TextView
+                                android:id="@+id/staffAttTotalStaff"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="#818181"
+                                android:text="Total staff"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/staffAttTotalStaffValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="#f19b1f"
+                                android:text="67"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/staffAttPresent"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="#818181"
+                                android:text="Present"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/staffAttPresentValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="#26aa8a"
+                                android:text="44"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/staffAttAbsent"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="#818181"
+                                android:text="Absent"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/staffAttAbsentValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="#cd3147"
+                                android:text="23"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="2dp"
+                            android:layout_weight="1">
+                        <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/staffAttChart"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="5dp"
+                                android:background="@android:color/white"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#d2d2d2"
+                        android:layout_alignParentBottom="true"/>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/staffAttFootlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:id="@+id/staffAttViewAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="#1a1a1a"
+                        android:text="View All Attendence"
+                />
+
+                <ImageView
+                        android:contentDescription="View All Attendence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="1dp"
+                        android:gravity="center"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/progressReportChart"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"/>
+
+</LinearLayout>

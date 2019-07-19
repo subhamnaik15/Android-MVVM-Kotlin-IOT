@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#64B5F6</color>
+    <color name="colorPrimaryDark">#64B5F6</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color_progress">#fbfbfb</color>
+
+    <color name="warning_color">#f4511e</color>
+    <color name="hint_color">#42000000</color>
+    <color name="success_color">#009688</color>
+
+    <color name="blue">#348af7</color>
+
+    <color name="temperature_background">@color/blue</color>
+    <color name="temperature_text">@android:color/white</color>
+
+    <color name="green_dot_big">@color/blue</color>
+    <color name="green_dot_small">@color/blue</color>
+
+    <color name="black_transparent">#14000000</color>
+    <color name="activity_bg_color">#eaedf2</color>
+
+
+</resources>

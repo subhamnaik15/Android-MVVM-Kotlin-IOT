@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ExpandableLayout">
+        <attr name="el_duration" format="integer" />
+        <attr name="el_expanded" format="boolean" />
+        <attr name="el_parallax" format="float" />
+        <attr name="layout_expandable" format="boolean" />
+        <attr name="android:orientation" />
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="nml_border_width" format="dimension" />
+        <attr name="nml_border_color" format="color" />
+        <attr name="nml_border_overlay" format="boolean" />
+        <attr name="nml_fill_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="SwipeButton">
+        <attr name="inner_text" format="string"/>
+        <attr name="inner_text_color" format="color"/>
+        <attr name="inner_text_size" format="dimension"/>
+        <attr name="inner_text_left_padding" format="dimension"/>
+        <attr name="inner_text_right_padding" format="dimension"/>
+        <attr name="inner_text_top_padding" format="dimension"/>
+        <attr name="inner_text_bottom_padding" format="dimension"/>
+        <attr name="inner_text_background" format="reference"/>
+        <attr name="button_image_width" format="dimension"/>
+        <attr name="button_image_height" format="dimension"/>
+        <attr name="button_trail_enabled" format="boolean"/>
+        <attr name="button_trail_drawable" format="reference"/>
+        <attr name="button_image_disabled" format="reference"/>
+        <attr name="button_image_enabled" format="reference"/>
+        <attr name="button_left_padding" format="dimension"/>
+        <attr name="button_right_padding" format="dimension"/>
+        <attr name="button_top_padding" format="dimension"/>
+        <attr name="button_bottom_padding" format="dimension"/>
+        <attr name="button_background" format="reference"/>
+        <attr name="has_activate_state" format="boolean"/>
+        <attr name="initial_state" format="enum">
+            <enum name="enabled" value="0"/>
+            <enum name="disabled" value="1"/>
+        </attr>
+
+
+    </declare-styleable>
+    <declare-styleable name="CardSlider">
+        <!-- Active card offset from start of RecyclerView. Default value is 50dp. -->
+        <attr name="activeCardLeftOffset" format="dimension"/>
+        <!-- Card width. Default value is 148dp. -->
+        <attr name="cardWidth" format="dimension"/>
+        <!-- Distance between cards. Default value is 12dp. -->
+        <attr name="cardsGap" format="dimension"/>
+        <!-- ViewUpdater implementation class. If not set, DefaultViewUpdater class is used. -->
+        <attr name="viewUpdater" format="string"/>
+    </declare-styleable>
+</resources>
