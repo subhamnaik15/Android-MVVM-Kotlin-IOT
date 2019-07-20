@@ -1,38 +1,14 @@
 package com.megathon.smarthome.ui.home.viewmodel
 
-import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.megathon.smarthome.ui.home.model.AppliancesUpdateModel
 
-class HomeViewModel() : ViewModel() {
-//    private val request: Request? = null
-//    private var empty: Boolean = false
-//
-//    @Bindable
-//    fun isEmpty(): Boolean {
-//        return empty
-//    }
-//
-//    fun setEmpty(empty: Boolean) {
-//        this.empty = empty
-////        notifyPropertyChanged(BR.empty)
-//    }
+class HomeViewModel(private var apiRepo: AppliancesUpdateRepo) : ViewModel() {
+    var appliancesUpdateLiveData: LiveData<AppliancesUpdateModel>? = null
 
-    fun download() {
-        //        setLoading(true);
-        //        setLoading(false);
-        //        offers = new ArrayList<>();
-        //        setOffers(response.getOfferList());
+    fun getAppliancesUpdate(userId: String, houseId: String, roomId: String, applianceId : String, status : Boolean) : LiveData<AppliancesUpdateModel> {
+        appliancesUpdateLiveData = apiRepo.getAppliancesUpdate(userId,houseId,roomId,applianceId,status)
+        return appliancesUpdateLiveData as LiveData<AppliancesUpdateModel>
     }
-
-
-//    override fun retry() {
-//        //        super.retry();
-//        request!!.retry();
-//    }
-//
-//    override fun clear() {
-//        request?.cancel()
-//    }
-
-
 }
