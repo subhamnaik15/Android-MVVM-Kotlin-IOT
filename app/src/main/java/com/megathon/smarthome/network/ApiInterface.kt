@@ -1,28 +1,28 @@
 package com.megathon.smarthome.network
 
-import com.megathon.smarthome.ui.login.SignInResponseModel
-import com.megathon.smarthome.ui.login.SigninModel
+import com.megathon.smarthome.ui.login.LoginResponseModel
+import com.megathon.smarthome.ui.login.LoginRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface APIInterface {
+interface ApiInterface {
 
 //    @FormUrlEncoded
 //    @POST("login")
-//    Call<SignInResponseModel> signIn(@Field("email") String email, @Field("type") String type, @Field("pass") String pass);
+//    Call<LoginResponseModel> signIn(@Field("email") String email, @Field("type") String type, @Field("pass") String pass);
 
     @POST("login")
-    abstract fun signIn(@Body signinModel: SigninModel): Call<SignInResponseModel>
+    fun signIn(@Body signinModel: LoginRequest): Call<LoginResponseModel>
 
 
-    interface Header {
-        companion object {
-            val AUTHORIZATION = "Authorization"
-            val TIMEZONE = "Timezone"
-        }
-
-    }
+//    interface Header {
+//        companion object {
+//            val AUTHORIZATION = "Authorization"
+//            val TIMEZONE = "Timezone"
+//        }
+//
+//    }
 
 //    @Multipart
 //    @POST("patients/register")

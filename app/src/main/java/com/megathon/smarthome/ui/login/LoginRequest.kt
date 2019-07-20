@@ -1,6 +1,6 @@
 package com.megathon.smarthome.ui.login
 
-class SigninModel {
+class LoginRequest {
 
     var email: String? = null
     var type: String? = null

@@ -2,7 +2,7 @@ package com.megathon.smarthome.ui.login
 
 import com.google.gson.annotations.SerializedName
 
-class SignInResponseModel {
+class LoginResponseModel {
 
     @SerializedName("errorStatus")
     var errorStatus: String? = null

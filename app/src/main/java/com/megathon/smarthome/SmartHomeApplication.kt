@@ -1,30 +1,15 @@
 package com.megathon.smarthome
 
 import android.app.Application
-import android.content.Context
-import com.megathon.smarthome.network.RetrofitClient
+import org.koin.android.ext.android.startKoin
 
 class SmartHomeApplication : Application() {
-
-    init {
-        instance = this
-    }
 
     override fun onCreate() {
         super.onCreate()
 
-        val context: Context = applicationContext()
-//        RetrofitClient.create(cacheDir)
+        // Start Koin
+        startKoin(this, listOf(loginModule))
     }
-
-    companion object {
-        private var instance: SmartHomeApplication? = null
-
-        fun applicationContext(): Context {
-            return instance!!.applicationContext
-        }
-
-    }
-
 
 }

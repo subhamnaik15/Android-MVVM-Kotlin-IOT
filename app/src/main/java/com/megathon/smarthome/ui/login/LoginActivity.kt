@@ -9,14 +9,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
-
+import androidx.lifecycle.Observer
+import com.megathon.smarthome.BR.viewModel
 import com.megathon.smarthome.R
 import com.megathon.smarthome.SmartHomeBaseActivity
 import com.megathon.smarthome.databinding.ActivitySigninBinding
 import com.megathon.smarthome.ui.home.MainActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
-
-class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
+class LoginActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
     override fun layoutId(): Int = R.layout.activity_signin
 
     private val animDuration: Long = 500
@@ -24,42 +25,38 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
     private val transValue: Float = 1000f
     private val transValueStart: Float = 1f
     private val transValueEnd: Float = 0f
-    private lateinit var signinViewmodel: SigninViewmodel
+    private val loginViewModel by viewModel<SigninViewmodel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        signinViewmodel = SigninViewmodel()
-
+        vb.viewModel = loginViewModel
         vb.idTittle.text = "Login"
         vb.tvForgetpass.text = "Forget Password ?"
 
         vb.tvForgetpass.setOnClickListener() {
             if (vb.idTittle.text.equals("Login"))
                 signinGoing() else
-                ForgetpassGoing()
+                forgetPasswordGoing()
 
         }
         signinComing()
 
         vb.floatingActionButton.setOnClickListener() {
+            vb.progressBar.visibility = View.VISIBLE
+            loginViewModel.getLoginDetails("satyamnaik15@gmail.com", "id", "password").observe(this, Observer {
+                val intent = (Intent(this@LoginActivity, MainActivity::class.java))
+                val options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this,
+                        vb.floatingActionButton, // Starting view
+                        "demo"    // The String
+                    )
+                vb.progressBar.visibility = View.GONE
+                ActivityCompat.startActivity(this, intent, options.toBundle())
+                finish()
+            })
 
-//            vb.loder.setAnimation("raw/loder1.json")
-//            vb.loder.repeatCount= LottieDrawable.INFINITE
-//            vb.loder.playAnimation()
-
-//            signinViewmodel.signin("satyamnaik15@gmail.com", "id", "password")
-            val intent = (Intent(this@SigninActivity, MainActivity::class.java))
-            val options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this,
-                    vb.floatingActionButton, // Starting view
-                    "demo"    // The String
-                )
-            ActivityCompat.startActivity(this, intent, options.toBundle())
-            finish()
         }
-
-
     }
 
     private fun signinGoing() {
@@ -73,9 +70,6 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
         val tvRegAnimOut = ObjectAnimator.ofFloat(vb.tvForgetpass, "translationX", transValue)
         tvRegAnimOut.repeatCount = animRepeat
         tvRegAnimOut.duration = animDuration
-//        val tvForgetAnimOut = ObjectAnimator.ofFloat(tvForget, "translationX", transValue)
-//        tvForgetAnimOut.repeatCount = animRepeat
-//        tvForgetAnimOut.duration = animDuration
         val idTitleAnimHide = ObjectAnimator.ofFloat(vb.idTittle, "alpha", transValueStart, transValueEnd)
         idTitleAnimHide.repeatCount = animRepeat
         idTitleAnimHide.duration = animDuration
@@ -95,7 +89,7 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
             }
 
             override fun onAnimationEnd(animation: Animator) {
-                ForgetpassComing()
+                forgetPasswordComing()
             }
 
             override fun onAnimationCancel(animation: Animator) {
@@ -105,7 +99,7 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
 
     }
 
-    private fun ForgetpassComing() {
+    private fun forgetPasswordComing() {
 
         vb.idTittle.text = "Forget Password"
         vb.tvForgetpass.text = "Login"
@@ -113,11 +107,6 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
 
         vb.etRePassword.visibility = View.VISIBLE
         vb.linView.visibility = View.VISIBLE
-
-//        val etEmailExpand = ObjectAnimator.ofFloat(etEmail, "translationY", 0f)
-//        etEmailExpand.repeatCount = 0
-//        etEmailExpand.duration = 1000
-
         val linearLayoutAnimIn = ObjectAnimator.ofFloat(vb.linearLayout, "translationX", transValueEnd)
         linearLayoutAnimIn.repeatCount = animRepeat
         linearLayoutAnimIn.duration = animDuration
@@ -132,7 +121,7 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
         set.start()
     }
 
-    private fun ForgetpassGoing() {
+    private fun forgetPasswordGoing() {
 
         vb.etRePassword.visibility = View.VISIBLE
         vb.linView.visibility = View.VISIBLE
@@ -144,9 +133,6 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
         val tvRegAnimOut = ObjectAnimator.ofFloat(vb.tvForgetpass, "translationX", transValue)
         tvRegAnimOut.repeatCount = animRepeat
         tvRegAnimOut.duration = animDuration
-//        val tvForgetAnimOut = ObjectAnimator.ofFloat(tvForget, "translationX", transValue)
-//        tvForgetAnimOut.repeatCount = animRepeat
-//        tvForgetAnimOut.duration = animDuration
         val idTitleAnimHide = ObjectAnimator.ofFloat(vb.idTittle, "alpha", transValueStart, transValueEnd)
         idTitleAnimHide.repeatCount = animRepeat
         idTitleAnimHide.duration = animDuration
@@ -191,9 +177,6 @@ class SigninActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
         val tvRegAnimIn = ObjectAnimator.ofFloat(vb.tvForgetpass, "translationX", transValueEnd)
         tvRegAnimIn.repeatCount = animRepeat
         tvRegAnimIn.duration = animDuration
-//        val tvForgetAnimIn = ObjectAnimator.ofFloat(tvForget, "translationX", transValueEnd)
-//        tvForgetAnimIn.repeatCount = animRepeat
-//        tvForgetAnimIn.duration = animDuration
         val idTitleAnimshow = ObjectAnimator.ofFloat(vb.idTittle, "alpha", transValueEnd, transValueStart)
         idTitleAnimshow.repeatCount = animRepeat
         idTitleAnimshow.duration = animDuration
