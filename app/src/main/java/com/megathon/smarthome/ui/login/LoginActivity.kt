@@ -10,7 +10,6 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
-import com.megathon.smarthome.BR.viewModel
 import com.megathon.smarthome.R
 import com.megathon.smarthome.SmartHomeBaseActivity
 import com.megathon.smarthome.databinding.ActivitySigninBinding
@@ -42,20 +41,22 @@ class LoginActivity : SmartHomeBaseActivity<ActivitySigninBinding>() {
         signinComing()
 
         vb.floatingActionButton.setOnClickListener() {
-            vb.progressBar.visibility = View.VISIBLE
-            loginViewModel.getLoginDetails("satyamnaik15@gmail.com", "id", "password").observe(this, Observer {
-                val intent = (Intent(this@LoginActivity, MainActivity::class.java))
-                val options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this,
-                        vb.floatingActionButton, // Starting view
-                        "demo"    // The String
-                    )
-                vb.progressBar.visibility = View.GONE
-                ActivityCompat.startActivity(this, intent, options.toBundle())
-                finish()
-            })
-
+            if (vb.tvForgetpass.text.equals("Forget Password ?")) {
+                vb.progressBar.visibility = View.VISIBLE
+                loginViewModel.getLoginDetails(vb.etEmail.text.toString(), vb.etPassword.text.toString())
+                    .observe(this, Observer {
+                        val intent = (Intent(this@LoginActivity, MainActivity::class.java))
+                        val options =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                this,
+                                vb.floatingActionButton, // Starting view
+                                "demo"    // The String
+                            )
+                        vb.progressBar.visibility = View.GONE
+                        ActivityCompat.startActivity(this, intent, options.toBundle())
+                        finish()
+                    })
+            }
         }
     }
 

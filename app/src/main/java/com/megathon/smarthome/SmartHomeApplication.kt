@@ -9,7 +9,7 @@ class SmartHomeApplication : Application() {
         super.onCreate()
 
         // Start Koin
-        startKoin(this, listOf(loginModule))
+        startKoin(this, listOf(loginModule,appliancesModule))
     }
 
 }

@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
-    private val baseURL = "https://home-automation-iot.herokuapp.com/web/iot/"
+    private val baseURL = "http://ec2-54-165-216-81.compute-1.amazonaws.com/"
     private val REQUEST_TIMEOUT = 60
 
     private var logging = HttpLoggingInterceptor()

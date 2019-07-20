@@ -8,10 +8,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginRepo {
-     fun getLoginDetails(loginRequest: LoginRequest): MutableLiveData<LoginResponseModel> {
+     fun getLoginDetails(email: String, password: String): MutableLiveData<LoginResponseModel> {
         val loginResponseLiveData = MutableLiveData<LoginResponseModel>()
 
-        val call = RetrofitClient.apiClientInstance.service.signIn(loginRequest)
+        val call = RetrofitClient.apiClientInstance.service.signIn(email, password)
         call.enqueue(object : Callback<LoginResponseModel> {
             override fun onResponse(call: Call<LoginResponseModel>, response: Response<LoginResponseModel>) {
                 if (response.isSuccessful) {
@@ -21,7 +21,7 @@ class LoginRepo {
             }
             override fun onFailure(call: Call<LoginResponseModel>, t: Throwable) {
                 Log.i("responce", t.message)
-            }
+             }
         })
         return loginResponseLiveData
     }

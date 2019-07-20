@@ -7,12 +7,8 @@ import androidx.lifecycle.ViewModel
 class SigninViewmodel(private var apiRepo: LoginRepo) : ViewModel() {
     var loginDetailLiveData: LiveData<LoginResponseModel>? = null
 
-    fun getLoginDetails(email: String, type: String, pass: String) : LiveData<LoginResponseModel>{
-        val signinModel = LoginRequest()
-        signinModel.email = email
-        signinModel.password = pass
-        signinModel.type = type
-        loginDetailLiveData = apiRepo.getLoginDetails(signinModel)
+    fun getLoginDetails(email: String, pass: String) : LiveData<LoginResponseModel>{
+        loginDetailLiveData = apiRepo.getLoginDetails(email,pass)
         return loginDetailLiveData as LiveData<LoginResponseModel>
     }
 }

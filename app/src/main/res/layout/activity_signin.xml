@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#eaedf2"
+            android:background="@drawable/bg_watermark"
             tools:context=".acount.SigninActivity">
 
         <ImageView android:id="@+id/imageView"
@@ -42,7 +42,6 @@
                     android:textColorHint="@color/colorPrimary"
                     android:drawablePadding="10dp"
                     android:background="@null"
-                    android:fontFamily="sans-serif-smallcaps"
                     tools:ignore="Autofill"/>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
@@ -50,7 +49,7 @@
                 <View
                         android:id="@+id/view"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="0.5dp"
                         android:layout_weight="0.8"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
@@ -76,7 +75,6 @@
                     android:hint="@string/password"
                     android:drawableStart="@drawable/ic_password"
                     android:drawablePadding="10dp"
-                    android:fontFamily="sans-serif-smallcaps"
                     tools:ignore="Autofill"/>
 
             <LinearLayout android:id="@+id/linView"

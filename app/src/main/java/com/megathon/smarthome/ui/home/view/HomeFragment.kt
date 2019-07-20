@@ -12,17 +12,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.ViewSwitcher
 import androidx.annotation.StyleRes
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.megathon.smarthome.ui.home.model.HouseModel
 import com.megathon.smarthome.ui.home.view.adapter.SliderAdapter
 import com.megathon.smarthome.R
 import com.megathon.smarthome.SmartHomeBaseFragment
 import com.megathon.smarthome.ui.graph.GraphActivity
+import com.megathon.smarthome.ui.home.MainActivity
 import com.megathon.smarthome.ui.home.view.cardSlider.CardSliderLayoutManager
 import com.megathon.smarthome.ui.home.view.cardSlider.CardSnapHelper
+import com.megathon.smarthome.ui.home.viewmodel.HomeViewModel
+import com.megathon.smarthome.ui.login.SigninViewmodel
+import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.text.Typography.times
 
 
 /**
@@ -34,30 +43,21 @@ class HomeFragment : SmartHomeBaseFragment<com.megathon.smarthome.databinding.Fr
 
 
     private val pics = intArrayOf(
-        R.drawable.p1,
-        R.drawable.p2,
-        R.drawable.p3,
-        R.drawable.p4,
-        R.drawable.p5
+        R.drawable.kitchen,
+        R.drawable.livingroom,
+        R.drawable.masterbedroom,
+        R.drawable.bathroom
     )
     private val descriptions =
         intArrayOf(
             R.string.text1,
             R.string.text2,
             R.string.text3,
-            R.string.text4,
-            R.string.text5
+            R.string.text4
         )
-    private val countries = arrayOf("KITCHEN", "HALL", "BATHROOM", "ROOM1", "ROOM2")
+    private val rooms = arrayOf("KITCHEN", "LIVING ROOM", "BEDROOM", "BATHROOM")
     private val places = arrayOf("About", "About", "About", "About", "About")
     private val temperatures = arrayOf("21°C", "19°C", "17°C", "23°C", "20°C")
-    private val times = arrayOf(
-        "Aug 1 - Dec 15    7:00-18:00",
-        "Sep 5 - Nov 10    8:00-16:00",
-        "Mar 8 - May 21    7:00-18:00",
-        "Aug 1 - Dec 15    7:00-18:00",
-        "Sep 5 - Nov 10    8:00-16:00"
-    )
 
     private var houseModelArrayList: ArrayList<HouseModel>? = null
     private var sliderAdapter: SliderAdapter? = null
@@ -67,6 +67,8 @@ class HomeFragment : SmartHomeBaseFragment<com.megathon.smarthome.databinding.Fr
     private var countryOffset2: Int = 0
     private var countryAnimDuration: Long = 0
     private var currentPosition: Int = 0
+
+    private val homeViewModel by viewModel<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,12 +80,21 @@ class HomeFragment : SmartHomeBaseFragment<com.megathon.smarthome.databinding.Fr
         initCountryText()
         initSwitchers()
         initListner()
-
+        vb.viewModel = homeViewModel
         vb.graphImage.setAnimation("raw/graph.json")
         vb.graphImage.repeatCount = 1
         vb.graphImage.tag = "INACTIVE"
         vb.graphImage.playAnimation()
+        vb.lightSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                homeViewModel.getAppliancesUpdate("test","testhouse","testroom","testappliance",isChecked).observe(this, Observer {
+                    if(isChecked) {
+                        Toast.makeText(activity, "Bulb on", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(activity, "bulb off", Toast.LENGTH_SHORT).show()
+                    }
+                })
 
+        }
         return vb.root
     }
 
@@ -101,50 +112,35 @@ class HomeFragment : SmartHomeBaseFragment<com.megathon.smarthome.databinding.Fr
         val house1 = HouseModel()
         house1.pic = pics[0]
         house1.descriptions = getString(descriptions[0])
-        house1.name = countries[0]
+        house1.name = rooms[0]
         house1.place = places[0]
         house1.temperature = temperatures[0]
-        house1.time = times[0]
         houseModelArrayList!!.add(house1)
 
         val house2 = HouseModel()
         house2.pic = pics[1]
         house2.descriptions = getString(descriptions[1])
-        house2.name = countries[1]
+        house2.name = rooms[1]
         house2.place = places[1]
         house2.temperature = temperatures[1]
-        house2.time = times[1]
         houseModelArrayList!!.add(house2)
 
 
         val house3 = HouseModel()
         house3.pic = pics[2]
         house3.descriptions = getString(descriptions[2])
-        house3.name = countries[2]
+        house3.name = rooms[2]
         house3.place = places[2]
         house3.temperature = temperatures[2]
-        house3.time = times[2]
         houseModelArrayList!!.add(house3)
 
         val house4 = HouseModel()
         house4.pic = pics[3]
         house4.descriptions = getString(descriptions[3])
-        house4.name = countries[3]
+        house4.name = rooms[3]
         house4.place = places[3]
         house4.temperature = temperatures[3]
-        house4.time = times[3]
         houseModelArrayList!!.add(house4)
-
-
-        val house5 = HouseModel()
-        house5.pic = pics[4]
-        house5.descriptions = getString(descriptions[4])
-        house5.name = countries[4]
-        house5.place = places[4]
-        house5.temperature = temperatures[4]
-        house5.time = times[4]
-        houseModelArrayList!!.add(house5)
-
 
         sliderAdapter =
             SliderAdapter(houseModelArrayList!!, OnCardClickListener())
